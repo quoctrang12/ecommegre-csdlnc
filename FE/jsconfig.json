@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "baseUrl": "./src",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "assets/*": ["assets/*"],
+      "components/*": ["components/*"],
+      "constants/*": ["constants/*"],
+      "hooks/*": ["hooks/*"],
+      "redux/*": ["redux/*"],
+      "screen/*": ["screen/*"],
+      "utils/*": ["utils/*"],
+      "common/*": ["common/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
