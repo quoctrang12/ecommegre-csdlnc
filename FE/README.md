@@ -4,8 +4,8 @@ A React + Vite frontend application for the ecommerce platform.
 
 ## Prerequisites
 
-- **Node.js** v14 or higher
-- **npm** or **yarn**
+- **Node.js** v24.x (or higher)
+- **npm** v10.0.0 or higher
 
 ## Installation
 
