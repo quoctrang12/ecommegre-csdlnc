@@ -1,72 +1,161 @@
-# Getting Started with Create React App
+# Ecommerce Frontend (FE)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React + Vite frontend application for the ecommerce platform.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+- **Node.js** v14 or higher
+- **npm** or **yarn**
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Navigate to the FE directory:
+```bash
+cd FE
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. Install dependencies:
+```bash
+npm install
+```
 
-### `npm test`
+## Environment Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Create a `.env` file in the FE directory with the following variables:
 
-### `npm run build`
+```
+# API Configuration
+VITE_BASE_URL=http://localhost:4009/api/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# External APIs
+VITE_API_COUNTRY=https://vapi.vnappmob.com/api/
+VITE_API_CURRENCY_RATE=https://api.apilayer.com/exchangerates_data/latest?symbols=VND&base=USD
+VITE_API_CURRENCY_KEY=your_api_key
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Payment Gateway
+VITE_PAYPAL_CLIENT_ID=your_paypal_client_id
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Shipping
+VITE_GHN_CURRENT_DISTRICT=1572
+VITE_GHN_CURRENT_WARD=550113
 
-### `npm run eject`
+# Social Login
+VITE_GOOGLE_OAUT_ID=your_google_oauth_id
+VITE_GOOGLE_OAUT_SECRET=your_google_oauth_secret
+VITE_FACEBOOK_AUTH_ID=your_facebook_auth_id
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Chatbot
+VITE_CHATBOT_APP_ID=your_chatbot_app_id
+VITE_CHATBOT_API_KEY=your_chatbot_api_key
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Important**: All `.env*` files should NOT have spaces around the `=` sign. Example:
+```
+✅ VITE_BASE_URL=http://localhost:4009/api/
+❌ VITE_BASE_URL = http://localhost:4009/api/
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Running the Application
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Development Mode
+```bash
+npm run dev
+```
+The application will start on `http://localhost:4007`
 
-## Learn More
+### Production Build
+```bash
+npm run build
+```
+Creates an optimized build in the `dist` folder.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Preview Production Build
+```bash
+npm run preview
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Structure
 
-### Code Splitting
+```
+FE/
+├── src/
+│   ├── components/     # Reusable React components
+│   │   ├── common/     # Common components (Header, Footer, etc.)
+│   │   ├── layouts/    # Layout components
+│   │   └── ui/         # UI components
+│   ├── screen/         # Full page components
+│   │   ├── admin/      # Admin pages
+│   │   ├── client/     # Customer pages
+│   │   └── shipper/    # Shipper pages
+│   ├── redux/          # Redux store and slices
+│   ├── utils/          # Utility functions and API clients
+│   │   ├── axiosPublic.jsx       # Public API client
+│   │   ├── axiosPrivate.jsx      # Private API client
+│   │   └── axiosClientPrivate.jsx # Client private API client
+│   ├── constants/      # Constants (menu, breadcrumbs, etc.)
+│   ├── hooks/          # Custom React hooks
+│   ├── assets/         # Images, styles, videos
+│   ├── App.jsx         # Main App component
+│   ├── index.jsx       # React entry point
+│   └── index.html      # HTML template
+├── public/             # Static files
+├── vite.config.js      # Vite configuration
+└── package.json        # Dependencies
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Key Features
 
-### Analyzing the Bundle Size
+- **React Router**: Multi-page navigation
+- **Redux**: State management
+- **Vite**: Fast build tool and dev server
+- **Material-UI (MUI)**: UI component library
+- **Axios**: HTTP client
+- **Social Login**: Google, Facebook authentication
+- **Payment**: PayPal integration
+- **Shipping**: Integration with shipping services
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## API Clients
 
-### Making a Progressive Web App
+The application uses three different Axios instances:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. **axiosPublic**: For unauthenticated requests
+2. **axiosPrivate**: For authenticated employee requests
+3. **axiosClientPrivate**: For authenticated customer requests
 
-### Advanced Configuration
+## Troubleshooting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### `.env` variables not loading
+- Ensure `.env` file is in the FE root directory (not in src/)
+- Restart the dev server after changing `.env` file
+- Check for spaces around `=` sign (should have none)
 
-### Deployment
+### Port 4007 already in use
+Edit `vite.config.js` and change the port:
+```javascript
+server: {
+  port: 3000  // Change to any available port
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Module not found
+Run `npm install` again to ensure all dependencies are installed.
 
-### `npm run build` fails to minify
+## Development Tips
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# ecommegre-FE
-# ecommegre-FE
+- Use Redux DevTools extension for debugging state
+- Check console for Vite HMR (Hot Module Replacement) issues
+- Use browser DevTools to inspect API calls
+
+## Building for Production
+
+```bash
+npm run build
+```
+
+The optimized build will be created in the `dist` folder, ready for deployment.
+
+## Related Backend
+
+The frontend connects to the backend API. Ensure the backend is running on `http://localhost:4009` or update `VITE_BASE_URL` accordingly.
+
+See [BE/README.md](../BE/README.md) for backend setup instructions.
